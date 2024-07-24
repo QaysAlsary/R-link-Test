@@ -127,7 +127,7 @@ class RegisterScreen extends StatelessWidget {
                           bgColor: AppColors.primary,
                           title: 'Register',
                           onPressed: () {
-                            if (bloc.registerFormKey.currentState!.validate()) {
+                            if (bloc.registerFormKey.currentState!.validate()&&bloc.passwordController.text==bloc.passwordConfController.text) {
                               bloc.add(RegisterEvent());
                             }
                           },

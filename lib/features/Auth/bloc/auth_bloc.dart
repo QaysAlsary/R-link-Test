@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
@@ -10,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rlink_test/features/Auth/model/auth_model.dart';
 import 'package:rlink_test/src/core/local_storage.dart';
-import 'package:rlink_test/src/di/services_locator.dart';
 import 'package:rlink_test/src/network_services/dio.dart';
 import 'package:rlink_test/src/network_services/end_points.dart';
 import 'package:rlink_test/src/validation/phone_validator.dart';
@@ -107,7 +105,7 @@ AuthModel? authModel;
     emit(state.copyWith(isLoading: true));
     try {
       final imagePath = selectedImage?.path;
-
+      print(imagePath);
       final data = FormData.fromMap({
         'files': [
           if (imagePath != null)
@@ -119,9 +117,9 @@ AuthModel? authModel;
         'password': passwordController.text,
         'password_confirmation': passwordConfController.text
       });
-
+       print(data.toString());
       final response = await Dio().request(
-        registerPath,
+        baseUrl+registerPath,
         options: Options(
           method: 'POST',
         ),
